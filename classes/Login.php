@@ -5,15 +5,6 @@ class Login extends Database{
 
     public $email;
     public $senha;
-
-    public function Cadastrar() {
-        $db = new Database('usuarios');
-        return $db->insert([
-                            'email'=> $this->email,
-                            'senha'  => $this->senha,
-                            'tipo' => $this->tipo
-                        ]);
-    }
         
       
     public function getLoginAluno($email, $senha){
