@@ -1,178 +1,400 @@
--- --------------------------------------------------------
--- Servidor:                     127.0.0.1
--- Versão do servidor:           10.4.13-MariaDB - mariadb.org binary distribution
--- OS do Servidor:               Win64
--- HeidiSQL Versão:              11.0.0.5919
--- --------------------------------------------------------
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Tempo de geração: 15-Nov-2022 às 16:50
+-- Versão do servidor: 10.4.25-MariaDB
+-- versão do PHP: 8.1.10
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8 */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
+--
+-- Banco de dados: `maisensina`
+--
 
--- Copiando estrutura do banco de dados para maisensina
-CREATE DATABASE IF NOT EXISTS `maisensina` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
-USE `maisensina`;
+-- --------------------------------------------------------
 
--- Copiando estrutura para tabela maisensina.administrativo
-CREATE TABLE IF NOT EXISTS `administrativo` (
-  `IdAdmin` int(11) NOT NULL AUTO_INCREMENT,
+--
+-- Estrutura da tabela `administrativo`
+--
+
+CREATE TABLE `administrativo` (
+  `IdAdmin` int(11) NOT NULL,
   `Email` varchar(50) NOT NULL,
   `Senha` varchar(50) NOT NULL,
   `Nome` varchar(100) NOT NULL,
   `IdCargo` int(11) NOT NULL,
-  `IdEscola` int(11) NOT NULL,
-  PRIMARY KEY (`IdAdmin`),
-  KEY `IdCargo` (`IdCargo`),
-  KEY `IdEscola` (`IdEscola`),
-  CONSTRAINT `administrativo_ibfk_1` FOREIGN KEY (`IdCargo`) REFERENCES `cargo` (`IdCargo`),
-  CONSTRAINT `administrativo_ibfk_2` FOREIGN KEY (`IdEscola`) REFERENCES `escola` (`IdEscola`)
+  `IdEscola` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela maisensina.administrativo: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `administrativo` DISABLE KEYS */;
-/*!40000 ALTER TABLE `administrativo` ENABLE KEYS */;
+-- --------------------------------------------------------
 
--- Copiando estrutura para tabela maisensina.aluno
-CREATE TABLE IF NOT EXISTS `aluno` (
-  `RA` varchar(20) NOT NULL,
-  `Email` varchar(50) NOT NULL,
-  `Senha` varchar(50) NOT NULL,
-  `Nome` varchar(100) NOT NULL,
-  `DataNasc` date NOT NULL,
-  PRIMARY KEY (`RA`)
+--
+-- Estrutura da tabela `aluno`
+--
+
+CREATE TABLE `aluno` (
+  `ra` varchar(20) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `senha` varchar(50) NOT NULL,
+  `nome` varchar(100) NOT NULL,
+  `datanasc` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela maisensina.aluno: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `aluno` DISABLE KEYS */;
-/*!40000 ALTER TABLE `aluno` ENABLE KEYS */;
+--
+-- Extraindo dados da tabela `aluno`
+--
 
--- Copiando estrutura para tabela maisensina.cargo
-CREATE TABLE IF NOT EXISTS `cargo` (
-  `IdCargo` int(11) NOT NULL AUTO_INCREMENT,
-  `Nome` varchar(100) NOT NULL,
-  PRIMARY KEY (`IdCargo`)
+INSERT INTO `aluno` (`ra`, `email`, `senha`, `nome`, `datanasc`) VALUES
+('123', 'cvantim@gail.com', '123', 'Caroline', '1999-10-09');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `cargo`
+--
+
+CREATE TABLE `cargo` (
+  `IdCargo` int(11) NOT NULL,
+  `Nome` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela maisensina.cargo: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `cargo` DISABLE KEYS */;
-/*!40000 ALTER TABLE `cargo` ENABLE KEYS */;
+--
+-- Extraindo dados da tabela `cargo`
+--
 
--- Copiando estrutura para tabela maisensina.certificado
-CREATE TABLE IF NOT EXISTS `certificado` (
-  `IdCertificado` int(11) NOT NULL AUTO_INCREMENT,
+INSERT INTO `cargo` (`IdCargo`, `Nome`) VALUES
+(1, 'Professor');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `certificado`
+--
+
+CREATE TABLE `certificado` (
+  `IdCertificado` int(11) NOT NULL,
   `Nome` varchar(100) NOT NULL,
   `IdEmpresa` int(11) DEFAULT NULL,
-  `IdProfessor` int(11) DEFAULT NULL,
-  PRIMARY KEY (`IdCertificado`),
-  KEY `IdEmpresa` (`IdEmpresa`),
-  KEY `IdProfessor` (`IdProfessor`),
-  CONSTRAINT `certificado_ibfk_1` FOREIGN KEY (`IdEmpresa`) REFERENCES `empresa` (`IdEmpresa`),
-  CONSTRAINT `certificado_ibfk_2` FOREIGN KEY (`IdProfessor`) REFERENCES `professor` (`IdProfessor`)
+  `IdProfessor` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela maisensina.certificado: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `certificado` DISABLE KEYS */;
-/*!40000 ALTER TABLE `certificado` ENABLE KEYS */;
+-- --------------------------------------------------------
 
--- Copiando estrutura para tabela maisensina.emissao
-CREATE TABLE IF NOT EXISTS `emissao` (
-  `IdEmissao` int(11) NOT NULL AUTO_INCREMENT,
+--
+-- Estrutura da tabela `emissao`
+--
+
+CREATE TABLE `emissao` (
+  `IdEmissao` int(11) NOT NULL,
   `RA` varchar(20) NOT NULL,
   `IdCertificado` int(11) NOT NULL,
-  `DataEmissao` date NOT NULL,
-  PRIMARY KEY (`IdEmissao`),
-  KEY `RA` (`RA`),
-  KEY `IdCertificado` (`IdCertificado`),
-  CONSTRAINT `emissao_ibfk_1` FOREIGN KEY (`RA`) REFERENCES `aluno` (`RA`),
-  CONSTRAINT `emissao_ibfk_2` FOREIGN KEY (`IdCertificado`) REFERENCES `certificado` (`IdCertificado`)
+  `DataEmissao` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela maisensina.emissao: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `emissao` DISABLE KEYS */;
-/*!40000 ALTER TABLE `emissao` ENABLE KEYS */;
+-- --------------------------------------------------------
 
--- Copiando estrutura para tabela maisensina.empresa
-CREATE TABLE IF NOT EXISTS `empresa` (
-  `IdEmpresa` int(11) NOT NULL AUTO_INCREMENT,
+--
+-- Estrutura da tabela `empresa`
+--
+
+CREATE TABLE `empresa` (
+  `IdEmpresa` int(11) NOT NULL,
   `CNPJ` varchar(14) NOT NULL,
   `Nome` varchar(100) NOT NULL,
   `Endereco` varchar(100) NOT NULL,
   `Email` varchar(50) NOT NULL,
-  `Senha` varchar(50) NOT NULL,
-  PRIMARY KEY (`IdEmpresa`)
+  `Senha` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela maisensina.empresa: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `empresa` DISABLE KEYS */;
-/*!40000 ALTER TABLE `empresa` ENABLE KEYS */;
+--
+-- Extraindo dados da tabela `empresa`
+--
 
--- Copiando estrutura para tabela maisensina.escola
-CREATE TABLE IF NOT EXISTS `escola` (
-  `IdEscola` int(11) NOT NULL AUTO_INCREMENT,
+INSERT INTO `empresa` (`IdEmpresa`, `CNPJ`, `Nome`, `Endereco`, `Email`, `Senha`) VALUES
+(1, '05.570.714/000', 'KABUM COMERCIO ELETRONICO S.A.', 'Rua Carlos Gomes, 1321', 'kabum@kabum.com', '123456');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `escola`
+--
+
+CREATE TABLE `escola` (
+  `IdEscola` int(11) NOT NULL,
   `Nome` varchar(100) NOT NULL,
-  `Endereco` varchar(100) NOT NULL,
-  PRIMARY KEY (`IdEscola`)
+  `Endereco` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela maisensina.escola: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `escola` DISABLE KEYS */;
-/*!40000 ALTER TABLE `escola` ENABLE KEYS */;
+-- --------------------------------------------------------
 
--- Copiando estrutura para tabela maisensina.post
-CREATE TABLE IF NOT EXISTS `post` (
-  `IdPost` int(11) NOT NULL AUTO_INCREMENT,
+--
+-- Estrutura da tabela `post`
+--
+
+CREATE TABLE `post` (
+  `IdPost` int(11) NOT NULL,
   `Titulo` varchar(100) NOT NULL,
   `DataPost` datetime NOT NULL,
   `Corpo` text NOT NULL,
   `Anexo` varchar(1000) DEFAULT NULL,
   `IdEmpresa` int(11) DEFAULT NULL,
-  `IdProfessor` int(11) DEFAULT NULL,
-  PRIMARY KEY (`IdPost`),
-  KEY `IdEmpresa` (`IdEmpresa`),
-  KEY `IdProfessor` (`IdProfessor`),
-  CONSTRAINT `post_ibfk_1` FOREIGN KEY (`IdEmpresa`) REFERENCES `empresa` (`IdEmpresa`),
-  CONSTRAINT `post_ibfk_2` FOREIGN KEY (`IdProfessor`) REFERENCES `professor` (`IdProfessor`)
+  `IdProfessor` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela maisensina.post: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `post` DISABLE KEYS */;
-/*!40000 ALTER TABLE `post` ENABLE KEYS */;
+-- --------------------------------------------------------
 
--- Copiando estrutura para tabela maisensina.professor
-CREATE TABLE IF NOT EXISTS `professor` (
-  `IdProfessor` int(11) NOT NULL AUTO_INCREMENT,
+--
+-- Estrutura da tabela `professor`
+--
+
+CREATE TABLE `professor` (
+  `IdProfessor` int(11) NOT NULL,
   `Email` varchar(50) NOT NULL,
   `Senha` varchar(50) NOT NULL,
   `Nome` varchar(100) NOT NULL,
   `DataNasc` date NOT NULL,
-  `IdCargo` int(11) NOT NULL,
-  PRIMARY KEY (`IdProfessor`),
-  KEY `IdCargo` (`IdCargo`),
-  CONSTRAINT `professor_ibfk_1` FOREIGN KEY (`IdCargo`) REFERENCES `cargo` (`IdCargo`)
+  `IdCargo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela maisensina.professor: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `professor` DISABLE KEYS */;
-/*!40000 ALTER TABLE `professor` ENABLE KEYS */;
+--
+-- Extraindo dados da tabela `professor`
+--
 
--- Copiando estrutura para tabela maisensina.turma
-CREATE TABLE IF NOT EXISTS `turma` (
-  `IdTurma` int(11) NOT NULL AUTO_INCREMENT,
+INSERT INTO `professor` (`IdProfessor`, `Email`, `Senha`, `Nome`, `DataNasc`, `IdCargo`) VALUES
+(1, 'caroline@professora.com', '123mudar', 'Caroline Vantim', '1999-10-09', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `turma`
+--
+
+CREATE TABLE `turma` (
+  `IdTurma` int(11) NOT NULL,
   `Curso` varchar(50) NOT NULL,
   `Semestre` int(11) NOT NULL,
-  `IdEscola` int(11) NOT NULL,
-  PRIMARY KEY (`IdTurma`),
-  KEY `IdEscola` (`IdEscola`),
-  CONSTRAINT `turma_ibfk_1` FOREIGN KEY (`IdEscola`) REFERENCES `escola` (`IdEscola`)
+  `IdEscola` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Copiando dados para a tabela maisensina.turma: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `turma` DISABLE KEYS */;
-/*!40000 ALTER TABLE `turma` ENABLE KEYS */;
+-- --------------------------------------------------------
 
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+--
+-- Estrutura da tabela `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `id` int(3) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `senha` varchar(50) NOT NULL,
+  `tipo` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `email`, `senha`, `tipo`) VALUES
+(1, 'carolinevantim@gmail.com', '12345', 'Aluno');
+
+--
+-- Índices para tabelas despejadas
+--
+
+--
+-- Índices para tabela `administrativo`
+--
+ALTER TABLE `administrativo`
+  ADD PRIMARY KEY (`IdAdmin`),
+  ADD KEY `IdCargo` (`IdCargo`),
+  ADD KEY `IdEscola` (`IdEscola`);
+
+--
+-- Índices para tabela `aluno`
+--
+ALTER TABLE `aluno`
+  ADD PRIMARY KEY (`ra`);
+
+--
+-- Índices para tabela `cargo`
+--
+ALTER TABLE `cargo`
+  ADD PRIMARY KEY (`IdCargo`);
+
+--
+-- Índices para tabela `certificado`
+--
+ALTER TABLE `certificado`
+  ADD PRIMARY KEY (`IdCertificado`),
+  ADD KEY `IdEmpresa` (`IdEmpresa`),
+  ADD KEY `IdProfessor` (`IdProfessor`);
+
+--
+-- Índices para tabela `emissao`
+--
+ALTER TABLE `emissao`
+  ADD PRIMARY KEY (`IdEmissao`),
+  ADD KEY `RA` (`RA`),
+  ADD KEY `IdCertificado` (`IdCertificado`);
+
+--
+-- Índices para tabela `empresa`
+--
+ALTER TABLE `empresa`
+  ADD PRIMARY KEY (`IdEmpresa`);
+
+--
+-- Índices para tabela `escola`
+--
+ALTER TABLE `escola`
+  ADD PRIMARY KEY (`IdEscola`);
+
+--
+-- Índices para tabela `post`
+--
+ALTER TABLE `post`
+  ADD PRIMARY KEY (`IdPost`),
+  ADD KEY `IdEmpresa` (`IdEmpresa`),
+  ADD KEY `IdProfessor` (`IdProfessor`);
+
+--
+-- Índices para tabela `professor`
+--
+ALTER TABLE `professor`
+  ADD PRIMARY KEY (`IdProfessor`),
+  ADD KEY `IdCargo` (`IdCargo`);
+
+--
+-- Índices para tabela `turma`
+--
+ALTER TABLE `turma`
+  ADD PRIMARY KEY (`IdTurma`),
+  ADD KEY `IdEscola` (`IdEscola`);
+
+--
+-- Índices para tabela `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `administrativo`
+--
+ALTER TABLE `administrativo`
+  MODIFY `IdAdmin` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `cargo`
+--
+ALTER TABLE `cargo`
+  MODIFY `IdCargo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `certificado`
+--
+ALTER TABLE `certificado`
+  MODIFY `IdCertificado` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `emissao`
+--
+ALTER TABLE `emissao`
+  MODIFY `IdEmissao` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `empresa`
+--
+ALTER TABLE `empresa`
+  MODIFY `IdEmpresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `escola`
+--
+ALTER TABLE `escola`
+  MODIFY `IdEscola` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `post`
+--
+ALTER TABLE `post`
+  MODIFY `IdPost` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `professor`
+--
+ALTER TABLE `professor`
+  MODIFY `IdProfessor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `turma`
+--
+ALTER TABLE `turma`
+  MODIFY `IdTurma` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Restrições para despejos de tabelas
+--
+
+--
+-- Limitadores para a tabela `administrativo`
+--
+ALTER TABLE `administrativo`
+  ADD CONSTRAINT `administrativo_ibfk_1` FOREIGN KEY (`IdCargo`) REFERENCES `cargo` (`IdCargo`),
+  ADD CONSTRAINT `administrativo_ibfk_2` FOREIGN KEY (`IdEscola`) REFERENCES `escola` (`IdEscola`);
+
+--
+-- Limitadores para a tabela `certificado`
+--
+ALTER TABLE `certificado`
+  ADD CONSTRAINT `certificado_ibfk_1` FOREIGN KEY (`IdEmpresa`) REFERENCES `empresa` (`IdEmpresa`),
+  ADD CONSTRAINT `certificado_ibfk_2` FOREIGN KEY (`IdProfessor`) REFERENCES `professor` (`IdProfessor`);
+
+--
+-- Limitadores para a tabela `emissao`
+--
+ALTER TABLE `emissao`
+  ADD CONSTRAINT `emissao_ibfk_1` FOREIGN KEY (`RA`) REFERENCES `aluno` (`RA`),
+  ADD CONSTRAINT `emissao_ibfk_2` FOREIGN KEY (`IdCertificado`) REFERENCES `certificado` (`IdCertificado`);
+
+--
+-- Limitadores para a tabela `post`
+--
+ALTER TABLE `post`
+  ADD CONSTRAINT `post_ibfk_1` FOREIGN KEY (`IdEmpresa`) REFERENCES `empresa` (`IdEmpresa`),
+  ADD CONSTRAINT `post_ibfk_2` FOREIGN KEY (`IdProfessor`) REFERENCES `professor` (`IdProfessor`);
+
+--
+-- Limitadores para a tabela `professor`
+--
+ALTER TABLE `professor`
+  ADD CONSTRAINT `professor_ibfk_1` FOREIGN KEY (`IdCargo`) REFERENCES `cargo` (`IdCargo`);
+
+--
+-- Limitadores para a tabela `turma`
+--
+ALTER TABLE `turma`
+  ADD CONSTRAINT `turma_ibfk_1` FOREIGN KEY (`IdEscola`) REFERENCES `escola` (`IdEscola`);
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
