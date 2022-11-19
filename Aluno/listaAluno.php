@@ -28,9 +28,9 @@
             Cadastros
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="listaProfessor.php">Cadastro Professor</a></li>
+            <li><a class="dropdown-item" href="../Professor/listaProfessor.php">Cadastro Professor</a></li>
             <li><a class="dropdown-item" href="listaAluno.php">Cadastro Aluno</a></li>
-            <li><a class="dropdown-item" href="listaEmpresa.php">Cadastro Empresa</a></li>
+            <li><a class="dropdown-item" href="../Empresa/listaEmpresa.php">Cadastro Empresa</a></li>
           </ul>
         </li>
         <li class="nav-item">
@@ -58,14 +58,14 @@
                 </thead>
                 <tbody>
                     <?php
-                        require_once('classes/Aluno.php');
+                        require_once('../classes/Aluno.php');
                         $aluno = new Aluno();
                         $alunos = $aluno->getTodosAlunos();
                         foreach($alunos as $line){ 
                             $ra = $line['ra'];
                             $nome = $line['nome'];
-                            $datanasc = $line['datanasc'];
-                            echo "<tr><td>$ra</td><td>$nome</td><td>$datanasc</td></tr>";
+                            $dataNasc = $line['dataNasc'];
+                            echo "<tr><td>$ra</td><td>$nome</td><td>$dataNasc</td></tr>";
                         }
                     ?>
                 </tbody>

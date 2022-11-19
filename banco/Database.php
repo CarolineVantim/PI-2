@@ -3,7 +3,7 @@
 class Database{
 
   const SERVERNAME = 'localhost';
-  const DBNAME = 'maisensina';
+  const DBNAME = 'maisensina2';
   const USERNAME = 'root';
   const PASS = '';
 

@@ -7,16 +7,16 @@
     }
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        if( $_POST['ra'] != "" && $_POST['email'] != "" && $_POST['senha'] != "" && $_POST['nome'] != "" &&   $_POST['datanasc'] != "")  { 
+        if( $_POST['ra'] != "" && $_POST['email'] != "" && $_POST['senha'] != "" && $_POST['nome'] != "" &&   $_POST['dataNasc'] != "")  { 
             
-            require_once('classes/Aluno.php');
+            require_once('../classes/Aluno.php');
             $aluno = new Aluno();
 
             $aluno->ra = $_POST['ra'];
             $aluno->email = $_POST['email'];
             $aluno->senha = $_POST['senha'];
             $aluno->nome = $_POST['nome'];
-            $aluno->datanasc = $_POST['datanasc']; 
+            $aluno->dataNasc = $_POST['dataNasc']; 
 
             $aluno->Cadastrar();
 
@@ -39,7 +39,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="inicio.php">Fatec Araras</a>
+    <a class="navbar-brand" href="../inicio.php">Fatec Araras</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -50,16 +50,16 @@
             Cadastros
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="listaProfessor.php">Cadastro Professor</a></li>
+            <li><a class="dropdown-item" href="../Professor/cadastroProfessor.php">Cadastro Professor</a></li>
             <li><a class="dropdown-item" href="listaAluno.php">Cadastro Aluno</a></li>
-            <li><a class="dropdown-item" href="listaEmpresa.php">Cadastro Empresa</a></li>
+            <li><a class="dropdown-item" href="../Empresa/listaEmpresa.php">Cadastro Empresa</a></li>
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="listaPost.php">Posts</a>
+          <a class="nav-link" href="../listaPost.php">Posts</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="logout.php">Sair</a>
+          <a class="nav-link" href="../logout.php">Sair</a>
         </li>
     </div>
   </div>
@@ -89,7 +89,7 @@
             </div>
             <div class="form-group">
                 <label>Data de Nascimento</label>
-                <input type="date" name="datanasc" class="form-control" value="">
+                <input type="date" name="dataNasc" class="form-control" value="">
                 <span class="help-block"></span>
             </div>
             <div class="form-group">

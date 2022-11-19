@@ -1,29 +1,28 @@
 <?php
 
-require_once './banco/Database.php';
+require_once '../banco/Database.php';
 
-class Aluno{
+class Professor{
 
-    public $id;
-
+    public $idProfessor;
+    public $email;
+    public $senha;
     public $nome;
-
-    public $sobrenome;
-
-    public $ra;
+    public $dataNasc;
 
     public function Cadastrar() {
-        $db = new Database('aluno');
-        return $db->insert([
+        $db = new Database('professor');
+        return $db->insert([  
+                            'email'=> "'$this->email'",
+                            'senha'=> "'$this->senha'",
                             'nome'=> "'$this->nome'",
-                            'sobrenome'=> "'$this->sobrenome'",
-                            'ra'=> "'$this->ra'"
+                            'dataNasc'=> "'$this->dataNasc'"
                             ]);
     }
         
       
     public static function getAll(){
-    return (new Database('aluno'))->select();
+    return (new Database('professor'))->select();
     }
     
 }
