@@ -37,7 +37,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Fatec Araras</a>
+    <a class="navbar-brand" href="inicio.php">Fatec Araras</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -48,13 +48,16 @@
             Cadastros
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Cadastro Professor</a></li>
+            <li><a class="dropdown-item" href="listaProfessor.php">Cadastro Professor</a></li>
             <li><a class="dropdown-item" href="ListaAluno.php">Cadastro Aluno</a></li>
-            <li><a class="dropdown-item" href="#">Cadastro Empresa</a></li>
+            <li><a class="dropdown-item" href="listaEmpresa.php">Cadastro Empresa</a></li>
           </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="listaPost.php">Posts</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="logout.php">Sair</a>
         </li>
     </div>
   </div>
@@ -62,7 +65,7 @@
 <h2>Alunos Cadastrados</h2>
     <div class="wrapper">
         <div class="content">
-            <a href="cadastroAluno.php">Adicionar Post</a>
+            <a href="criarPost.php">Adicionar Post</a>
         </div>
         <section class="aluno">
             <table class="data-table">
@@ -78,6 +81,7 @@
                         $post = new Post();
                         $posts = $post->getPost();
                         foreach($posts as $line){ 
+                            $idPost = $line['idPost'];
                             $titulo = $line['titulo'];
                             $dataPost = $line['dataPost'];
                             echo "<tr><td>$titulo</td><td>$dataPost</td></tr>";
