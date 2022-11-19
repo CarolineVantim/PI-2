@@ -1,28 +1,27 @@
 <?php
-    // session_start();
+    session_start();
 
-    // if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    //     header("location: index.php");
-    //     exit;
-    // }
+    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+        header("location: index.php");
+        exit;
+    }
 
-    // if($_SERVER["REQUEST_METHOD"] == "POST"){
-    //     if( $_POST['ra'] != "" && $_POST['email'] != "" && $_POST['senha'] != "" && $_POST['nome'] != "" &&   $_POST['datanasc'] != "")  { 
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        if( $_POST['email'] != "" && $_POST['senha'] != "" && $_POST['nome'] != "" && $_POST['dataNasc'] != "")  { 
             
-    //         require_once('classes/Aluno.php');
-    //         $aluno = new Aluno();
+            require_once('classes/Professor.php');
+            $professor = new Professor();
 
-    //         $aluno->ra = $_POST['ra'];
-    //         $aluno->email = $_POST['email'];
-    //         $aluno->senha = $_POST['senha'];
-    //         $aluno->nome = $_POST['nome'];
-    //         $aluno->datanasc = $_POST['datanasc']; 
+            $professor->email = $_POST['email'];
+            $professor->senha = $_POST['senha'];
+            $professor->nome = $_POST['nome'];
+            $professor->dataNasc = $_POST['dataNasc']; 
 
-    //         $aluno->Cadastrar();
+            $professor->cadastrar();
 
-    //         header("location: ListaAluno.php");
-    //     }
-    // }
+            header("location: listaProfessor.php");
+        }
+    }
       
 ?>
 <!DOCTYPE html>
@@ -64,9 +63,34 @@
     </div>
   </div>
 </nav>
-
-<h3 class="mb-5">Professores</h3>
-
+    <div class="wrapper">
+        <h2>Cadastro de novo Professor</h2>
+        <form action="cadastroProfessor.php" method="POST">
+            <div class="form-group">
+                <label>E-mail</label>
+                <input type="email" name="email" class="form-control" value="">
+                <span class="help-block"></span>
+            </div>    
+            <div class="form-group">
+                <label>Senha</label>
+                <input type="password" name="senha" class="form-control" value="">
+                <span class="help-block"></span>
+            </div>
+            <div class="form-group">
+                <label>Nome</label>
+                <input type="text" name="nome" class="form-control" value="">
+                <span class="help-block"></span>
+            </div>
+            <div class="form-group">
+                <label>Data de Nascimento</label>
+                <input type="date" name="dataNasc" class="form-control" value="">
+                <span class="help-block"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="cadastrar">
+            </div>
+        </form>
+    </div>
     
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
