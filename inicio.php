@@ -28,9 +28,9 @@
             Cadastros
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="/Professor/listaProfessor.php">Cadastro Professor</a></li>
-            <li><a class="dropdown-item" href="/Aluno/listaAluno.php">Cadastro Aluno</a></li>
-            <li><a class="dropdown-item" href="/Empresa/listaEmpresa.php">Cadastro Empresa</a></li>
+            <li><a class="dropdown-item" href="Professor/listaProfessor.php">Cadastro Professor</a></li>
+            <li><a class="dropdown-item" href="Aluno/listaAluno.php">Cadastro Aluno</a></li>
+            <li><a class="dropdown-item" href="Empresa/listaEmpresa.php">Cadastro Empresa</a></li>
           </ul>
         </li>
         <li class="nav-item">

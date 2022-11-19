@@ -7,19 +7,20 @@
     }
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        if( $_POST['email'] != "" && $_POST['senha'] != "" && $_POST['nome'] != "" && $_POST['dataNasc'] != "")  { 
+        if( $_POST['cnpj'] != "" && $_POST['nome'] != "" && $_POST['endereco'] != "" && $_POST['email'] != "" && $_POST['senha'] != "")  { 
             
-            require_once('../classes/Professor.php');
-            $professor = new Professor();
+            require_once('../classes/Empresa.php');
+            $empresa = new Empresa();
 
-            $professor->email = $_POST['email'];
-            $professor->senha = $_POST['senha'];
-            $professor->nome = $_POST['nome'];
-            $professor->dataNasc = $_POST['dataNasc']; 
+            $empresa->cnpj = $_POST['cnpj'];
+            $empresa->nome = $_POST['nome'];
+            $empresa->endereco = $_POST['endereco'];
+            $empresa->email = $_POST['email'];
+            $empresa->senha = $_POST['senha'];
 
-            $professor->Cadastrar();
+            $empresa->Cadastrar();
 
-            header("location: listaProfessor.php");
+            header("location: listaEmpresa.php");
         }
     }
       
@@ -38,7 +39,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="inicio.php">Fatec Araras</a>
+    <a class="navbar-brand" href="../inicio.php">Fatec Araras</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -49,48 +50,53 @@
             Cadastros
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="listaProfessor.php">Cadastro Professor</a></li>
-            <li><a class="dropdown-item" href="listaAluno.php">Cadastro Aluno</a></li>
+            <li><a class="dropdown-item" href="../Professor/cadastroProfessor.php">Cadastro Professor</a></li>
+            <li><a class="dropdown-item" href="../Aluno/listaAluno.php">Cadastro Aluno</a></li>
             <li><a class="dropdown-item" href="listaEmpresa.php">Cadastro Empresa</a></li>
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="listaPost.php">Posts</a>
+          <a class="nav-link" href="../listaPost.php">Posts</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="logout.php">Sair</a>
+          <a class="nav-link" href="../logout.php">Sair</a>
         </li>
     </div>
   </div>
 </nav>
     <div class="wrapper">
-        <h2>Cadastro de novo Professor</h2>
-        <form action="cadastroProfessor.php" method="POST">
+        <h2>Cadastro de novo aluno</h2>
+        <form action="cadastroAluno.php" method="POST">
             <div class="form-group">
-                <label>E-mail</label>
-                <input type="email" name="email" class="form-control" value="">
+                <label>CNPJ</label>
+                <input type="text" name="cnpj" class="form-control" value="">
                 <span class="help-block"></span>
             </div>    
-            <div class="form-group">
-                <label>Senha</label>
-                <input type="password" name="senha" class="form-control" value="">
-                <span class="help-block"></span>
-            </div>
             <div class="form-group">
                 <label>Nome</label>
                 <input type="text" name="nome" class="form-control" value="">
                 <span class="help-block"></span>
             </div>
             <div class="form-group">
-                <label>Data de Nascimento</label>
-                <input type="date" name="dataNasc" class="form-control" value="">
+                <label>endereco</label>
+                <input type="text" name="endereco" class="form-control" value="">
                 <span class="help-block"></span>
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="cadastrar">
+                <label>Email</label>
+                <input type="email" name="email" class="form-control" value="">
+                <span class="help-block"></span>
+            </div>
+            <div class="form-group">
+                <label>Senha</label>
+                <input type="password" name="senha" class="form-control" value="">
+                <span class="help-block"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Cadastrar">
             </div>
         </form>
-    </div>
+    </div>  
     
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>

@@ -7,16 +7,16 @@
     }
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        if( $_POST['ra'] != "" && $_POST['email'] != "" && $_POST['senha'] != "" && $_POST['nome'] != "" &&   $_POST['datanasc'] != "")  { 
+        if( $_POST['ra'] != "" && $_POST['email'] != "" && $_POST['senha'] != "" && $_POST['nome'] != "" &&   $_POST['dataNasc'] != "")  { 
             
-            require_once('classes/Aluno.php');
+            require_once('../classes/Aluno.php');
             $aluno = new Aluno();
 
             $aluno->ra = $_POST['ra'];
             $aluno->email = $_POST['email'];
             $aluno->senha = $_POST['senha'];
             $aluno->nome = $_POST['nome'];
-            $aluno->datanasc = $_POST['datanasc']; 
+            $aluno->dataNasc = $_POST['dataNasc']; 
 
             $aluno->Cadastrar();
 
@@ -89,7 +89,7 @@
             </div>
             <div class="form-group">
                 <label>Data de Nascimento</label>
-                <input type="date" name="datanasc" class="form-control" value="">
+                <input type="date" name="dataNasc" class="form-control" value="">
                 <span class="help-block"></span>
             </div>
             <div class="form-group">

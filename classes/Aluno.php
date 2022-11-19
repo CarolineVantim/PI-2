@@ -1,6 +1,6 @@
 <?php
 
-require_once './banco/Database.php';
+require_once '../banco/Database.php';
 
 class Aluno{
 
@@ -8,7 +8,7 @@ class Aluno{
     public $email;
     public $senha;
     public $nome;
-    public $datanasc;
+    public $dataNasc;
     
     public function Cadastrar() {
         $db = new Database('aluno');
@@ -17,7 +17,7 @@ class Aluno{
                             'email'=> "'$this->email'",
                             'senha'=> "'$this->senha'",
                             'nome'=> "'$this->nome'",
-                            'datanasc'=> "'$this->datanasc'"
+                            'dataNasc'=> "'$this->dataNasc'"
                             ]);
     }
         
