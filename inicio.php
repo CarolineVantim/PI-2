@@ -28,16 +28,16 @@
             Cadastros
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Cadastro Professor</a></li>
-            <li><a class="dropdown-item" href="ListaAluno.php">Cadastro Aluno</a></li>
-            <li><a class="dropdown-item" href="#">Cadastro Empresa</a></li>
+            <li><a class="dropdown-item" href="listaProfessor.php">Cadastro Professor</a></li>
+            <li><a class="dropdown-item" href="listaAluno.php">Cadastro Aluno</a></li>
+            <li><a class="dropdown-item" href="listaEmpresa.php">Cadastro Empresa</a></li>
           </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="listaPost.php">Posts</a>
         </li>
         <li class="nav-item">
-          <button type="submit">Logout</button>
+          <a class="nav-link" href="logout.php">Sair</a>
         </li>
     </div>
   </div>
