@@ -39,7 +39,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="../inicio.php">Fatec Araras</a>
+    <a class="navbar-brand" href="../dashboard.php">Fatec Araras</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -65,8 +65,8 @@
   </div>
 </nav>
     <div class="wrapper">
-        <h2>Cadastro de novo aluno</h2>
-        <form action="cadastroAluno.php" method="POST">
+        <h2>Cadastro de empresa</h2>
+        <form action="cadastroEmpresa.php" method="POST">
             <div class="form-group">
                 <label>CNPJ</label>
                 <input type="text" name="cnpj" class="form-control" value="">
@@ -78,7 +78,7 @@
                 <span class="help-block"></span>
             </div>
             <div class="form-group">
-                <label>endereco</label>
+                <label>Endereco</label>
                 <input type="text" name="endereco" class="form-control" value="">
                 <span class="help-block"></span>
             </div>

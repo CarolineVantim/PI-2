@@ -1,6 +1,6 @@
 <?php
 
-require_once './banco/Database.php';
+require_once '../banco/Database.php';
 
 class Empresa{
 
