@@ -1,18 +1,40 @@
 <?php
-    require_once('classes/Login.php');
+require_once "classes/Login.php";
 
-    if($_SERVER["REQUEST_METHOD"] == "POST"){ // se o método chamado for tipo Post
-        $usuario = new Login();
-        $result = $usuario->getEmpresa($_POST['email']); 
-        $row = $result->fetch_assoc(); 
-        if($_POST['email'] and $_POST['senha']){ // se o usuario e senha for valido
-            session_start(); // inicializa session 
-            $_SESSION['loggedin'] = TRUE; // seta no session loggedin verdadeiro
-            header("location: dashboard.php"); // redireciona para inicio
-            } else {
-                $_SESSION['loggedin'] = FALSE; // se não seta no session loggedin falso
+
+session_start();
+
+if (isset($_SESSION['administrativo'])) {
+    header("location: dashboard.php");
+} else if (isset($_SESSION['aluno'])) {
+    header("location: dashboardAluno.php");
+} else if (isset($_SESSION['professor'])) {
+    header("location: dashboardProfessor.php");
+} else if (isset($_SESSION['empresa'])) {
+    header("location: dashboardEmpresa.php");
+}
+
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $login = new Login();
+    $validar = $login->validarLogin($_POST['email'], $_POST['senha']);
+
+    if ($validar ) {
+        if ($validar == 'administrativo') {
+            $_SESSION['administrativo'] = TRUE;
+            header("location: dashboard.php");
+        } else if ($validar == 'aluno') {
+            $_SESSION['aluno'] = TRUE;
+            header("location: dashboardAluno.php");
+        } else if ($validar == 'professor') {
+            $_SESSION['professor'] = TRUE;
+            header("location: dashboardProfessor.php");
+        } else if ($validar == 'empresa') {
+            $_SESSION['empresa'] = TRUE;
+            header("location: dashboardEmpresa.php");
         }
     }
+}
 ?>
  
 <!DOCTYPE html>

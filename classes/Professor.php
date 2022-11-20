@@ -9,6 +9,11 @@ class Professor{
     public $senha;
     public $nome;
     public $dataNasc;
+    public $idCargo;
+
+    public function getIdCargo($idCargo){
+        $this->idCargo = $idCargo;
+    }
 
     public function Cadastrar() {
         $db = new Database('professor');

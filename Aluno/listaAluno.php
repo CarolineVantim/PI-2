@@ -60,7 +60,7 @@
                     <?php
                         require_once('../classes/Aluno.php');
                         $aluno = new Aluno();
-                        $alunos = $aluno->getTodosAlunos();
+                        $alunos = $aluno->getAlunos();
                         foreach($alunos as $line){ 
                             $ra = $line['ra'];
                             $nome = $line['nome'];

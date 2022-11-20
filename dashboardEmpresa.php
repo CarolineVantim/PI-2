@@ -1,8 +1,7 @@
 <?php
     session_start(); // initial session
-    print_r(session_status());
 
-    if(!isset($_SESSION["administrativo"]) || $_SESSION["administrativo"] !== true){ // se não existir loggedin no session ou loggedin não estuver valido volta para index.php
+    if(!isset($_SESSION["empresa"]) || $_SESSION["empresa"] !== true){ // se não existir loggedin no session ou loggedin não estuver valido volta para index.php
         header("location: index.php");
         exit;
     }
@@ -18,7 +17,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="dashboard.php">Fatec Araras</a>
+  <a class="navbar-brand" href="#">Empresa</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -29,13 +28,13 @@
             Cadastros
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="./Professor/listaProfessor.php">Cadastro Professor</a></li>
-            <li><a class="dropdown-item" href="Aluno/listaAluno.php">Cadastro Aluno</a></li>
-            <li><a class="dropdown-item" href="Empresa/listaEmpresa.php">Cadastro Empresa</a></li>
+            <li><a class="dropdown-item" href="#">Cadastro Professor</a></li>
+            <li><a class="dropdown-item" href="ListaAluno.php">Cadastro Aluno</a></li>
+            <li><a class="dropdown-item" href="#">Cadastro Empresa</a></li>
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="listaPost.php">Posts</a>
+          <a class="nav-link" href="#">Posts</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="logout.php">Sair</a>
@@ -43,8 +42,7 @@
     </div>
   </div>
 </nav>
-<h2>Bem vindo</h2>
-<!-- <div class="page-header">
+    <!-- <div class="page-header">
         <h1>Olá, <b>
         <br>
         </b>Bem vindo(a).</h1>

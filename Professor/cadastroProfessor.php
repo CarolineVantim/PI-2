@@ -1,7 +1,8 @@
 <?php
-    session_start();
+    session_start(); // initial session
+    print_r(session_status());
 
-    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    if(!isset($_SESSION["administrativo"]) || $_SESSION["administrativo"] !== true){ // se não existir loggedin no session ou loggedin não estuver valido volta para index.php
         header("location: index.php");
         exit;
     }
@@ -38,7 +39,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="dashboard.php">Fatec Araras</a>
+    <a class="navbar-brand" href="../dashboard.php">Fatec Araras</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -50,15 +51,15 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="listaProfessor.php">Cadastro Professor</a></li>
-            <li><a class="dropdown-item" href="listaAluno.php">Cadastro Aluno</a></li>
-            <li><a class="dropdown-item" href="listaEmpresa.php">Cadastro Empresa</a></li>
+            <li><a class="dropdown-item" href="../Aluno/listaAluno.php">Cadastro Aluno</a></li>
+            <li><a class="dropdown-item" href="../Empresa/listaEmpresa.php">Cadastro Empresa</a></li>
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="listaPost.php">Posts</a>
+          <a class="nav-link" href="../listaPost.php">Posts</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="logout.php">Sair</a>
+          <a class="nav-link" href="../logout.php">Sair</a>
         </li>
     </div>
   </div>
@@ -86,8 +87,25 @@
                 <input type="date" name="dataNasc" class="form-control" value="">
                 <span class="help-block"></span>
             </div>
+            <!-- <br>
+            <label for="">Cargo</label>
+            <select name="cargo">
+              <option value="Selecione" selected>Selecione</option>
+                <?php
+                  // while($dados = mysqli_fetch_assoc($result)){
+                ?>
+              <option value="<?php //echo $dados['idCargo'] ?>">
+                  <?php // echo $dados['cargo'] ?>
+              </option>
+              <?php
+              //}
+
+              ?>
+            </select> -->
+            <br>
+            <br>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="cadastrar">
+                <input type="submit" class="btn btn-primary" value="Cadastrar">
             </div>
         </form>
     </div>

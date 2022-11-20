@@ -3,12 +3,11 @@
 class Database{
 
   const SERVERNAME = 'localhost';
-  const DBNAME = 'maisensina2';
+  const DBNAME = 'maisensina';
   const USERNAME = 'root';
   const PASS = '';
 
   private $table;
-
   private $connection;
 
   public function __construct($table = null){
@@ -16,11 +15,12 @@ class Database{
     $this->setConnection();
   }
 
-  private function setConnection(){
+  public function setConnection(){
     $this->connection = new mysqli(self::SERVERNAME, self::USERNAME, self::PASS, self::DBNAME);
     if ($this->connection->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
+      die("Connection failed: " . $this->connection->connect_error);
     }
+    return $this->connection;
   }
 
   public function insert($values){

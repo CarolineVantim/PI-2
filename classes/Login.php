@@ -1,43 +1,73 @@
 <?php
+
 require_once './banco/Database.php';
 
-class Login extends Database{
+class Login extends Database
+{
 
-    public $email;
-    public $senha;
-        
-      
-    public function getLoginAluno($email, $senha){
-        
-        $email = filter_input(INPUT_POST, 'email');
-        $senha = filter_input(INPUT_POST, 'senha');
+    public function validarLogin($email, $senha)
+    {
+        $login = "";
+        $count = 0;
 
-        if(is_null($email) or is_null($senha)){
+        $conn = database::setConnection();
+
+        $sql = "SELECT Email, Senha FROM administrativo";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                if (($email == $row["Email"]) && ($senha == $row["Senha"])) {
+                    $login = "administrativo";
+                    $count++;
+                }
+            }
+        }
+
+
+        $sql = "SELECT Email, Senha FROM aluno";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                if (($email == $row["Email"]) && ($senha == $row["Senha"])) {
+                    $login = "aluno";
+                    $count++;
+                }
+            }
+        }
+
+        $sql = "SELECT Email, Senha FROM professor";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                if (($email == $row["Email"]) && ($senha == $row["Senha"])) {
+                    $login = "professor";
+                    $count++;
+                }
+            }
+        }
+
+        $sql = "SELECT Email, Senha FROM empresa";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                if (($email == $row["Email"]) && ($senha == $row["Senha"])) {
+                    $login = "empresa";
+                    $count++;
+                }
+            }
+        }
+
+
+        if (!$conn) {
             return false;
         }
 
-        $db = new Database('aluno');
-        return $db->select("email = '$email'");
+        $conn->close();
 
-        if(!$db){
+        if ($count < 2) {
+            return $login;
+        } else {
             return false;
         }
-
-        if (password_verify($senha, $db['senha'])){
-            unset($db['senha']);
-            $_SESSION['auth'] = $db;
-            return true;
-        }
-        return false;
-
-    }
-
-    public function getProfessor($email){
-        return (new Database('professor'))->select("email = '$email'");
-    }
-
-    public function getEmpresa($email){
-        return (new Database('empresa'))->select("email = '$email'");
     }
 }
-?>

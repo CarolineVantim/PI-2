@@ -22,7 +22,7 @@ class Aluno{
     }
         
 
-    public static function getTodosAlunos(){
+    public static function getAlunos(){
         return (new Database('aluno'))->select();
     }
     

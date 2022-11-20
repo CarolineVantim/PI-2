@@ -1,11 +1,11 @@
 <?php
-     session_start();
+    session_start(); // initial session
+    print_r(session_status());
 
-     if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-         header("location: index.php");
-         exit;
-     }
-      
+    if(!isset($_SESSION["administrativo"]) || $_SESSION["administrativo"] !== true){ // se não existir loggedin no session ou loggedin não estuver valido volta para index.php
+        header("location: index.php");
+        exit;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -71,7 +71,7 @@
                             $nome = $line['nome'];
                             $email = $line['email'];
                             $dataNasc = $line['dataNasc'];
-                            echo "<tr><td>$nome</td><td>$email</td><td>$dataNasc</td></tr>";
+                            echo "<tr><td>$nome</td><td>$email</td><td>$dataNasc</td><td>";
                         }
                     ?>
                 </tbody>
