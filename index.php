@@ -8,7 +8,7 @@
         if($_POST['email'] and $_POST['senha']){ // se o usuario e senha for valido
             session_start(); // inicializa session 
             $_SESSION['loggedin'] = TRUE; // seta no session loggedin verdadeiro
-            header("location: inicio.php"); // redireciona para inicio
+            header("location: dashboard.php"); // redireciona para inicio
             } else {
                 $_SESSION['loggedin'] = FALSE; // se não seta no session loggedin falso
         }
