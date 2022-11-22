@@ -1,32 +1,31 @@
 <?php
-     session_start();
+     session_start(); // initial session
 
-     if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+     if(!isset($_SESSION["administrativo"]) || $_SESSION["administrativo"] !== true){ // se não existir loggedin no session ou loggedin não estuver valido volta para index.php
          header("location: index.php");
          exit;
      }
 
      if($_SERVER["REQUEST_METHOD"] == "POST"){
-         if( $_POST['ra'] != "" && $_POST['email'] != "" && $_POST['senha'] != "" && $_POST['nome'] != "" &&   $_POST['datanasc'] != "")  { 
+         if($_POST['titulo'] != "" && $_POST['corpo'] != "")  { 
             
-             require_once('classes/Aluno.php');
-             $aluno = new Aluno();
+             require_once('classes/Post.php');
+             $postes = new Post();
 
-             $aluno->ra = $_POST['ra'];
-             $aluno->email = $_POST['email'];
-            $aluno->senha = $_POST['senha'];
-             $aluno->nome = $_POST['nome'];
-             $aluno->datanasc = $_POST['datanasc']; 
+             $postes->titulo = $_POST['titulo'];
+             //$postes->dataPost = $_POST['dataPost'];
+             $postes->corpo = $_POST['corpo'];
+             //$postes->idProfessor = $_POST['idProfessor']; 
 
-            $aluno->Cadastrar();
+            $postes->Cadastrar();
 
-            header("location: listaAluno.php");
+            header("location: listaPost.php");
          }
     }
       
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt_BR">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,12 +33,11 @@
     <title>Cadastro</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0-beta.0/dist/trix.css">
-    <script type="text/javascript" src="https://unpkg.com/trix@2.0.0-beta.0/dist/trix.umd.min.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="dashboard.php">Fatec Araras</a>
+    <a class="navbar-brand" href="dashboard.php">Administrador</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -67,16 +65,20 @@
 
 <h3 class="mb-5">Novo Post</h3>
 
-    <form action="" method="GET">
+    <form action="criarPost.php" method="POST">
         <br>
         <div class="form-group">
             <label for="pagesTitle">Título</label>
-            <input type="text" name="title" id="pagesTitle" class="form-control" placeholder="Título">
+            <input type="text" name="titulo" id="pagesTitle" class="form-control" required placeholder="Título">
         </div>
+        <!-- <div class="form-group">
+            <label for="pagesTitle">Data</label>
+            <input type="date" name="dataPost" id="pagesTitle" class="form-control" placeholder="Data">
+        </div> -->
         <br>
-        <div class="form-group">
-            <input id="pagesCorpo" type="hidden" name="corpo">
-            <trix-editor input="pagesCorpo"></trix-editor>
+        <div class="trix-content">
+            <input id="corpo" type="hidden" name="corpo">
+            <trix-editor input="corpo"></trix-editor>
         </div>
         <br>
         <button type="submit" class="btn btn-primary">Salvar</button>
@@ -85,6 +87,7 @@
     
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
+    <script src="resources/js/bootstrap.min.js"></script>
+    <script src="resources/trix/trix.js"></script>
 </body>
 </html>

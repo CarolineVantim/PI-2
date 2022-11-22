@@ -34,7 +34,7 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Posts</a>
+          <a class="nav-link" href="listaPost.php">Posts</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="logout.php">Sair</a>

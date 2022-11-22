@@ -6,6 +6,7 @@ class Database{
   const DBNAME = 'maisensina';
   const USERNAME = 'root';
   const PASS = '';
+  const PORT = '33306';
 
   private $table;
   private $connection;
@@ -16,7 +17,7 @@ class Database{
   }
 
   public function setConnection(){
-    $this->connection = new mysqli(self::SERVERNAME, self::USERNAME, self::PASS, self::DBNAME);
+    $this->connection = new mysqli(self::SERVERNAME, self::USERNAME, self::PASS, self::DBNAME, self::PORT); //self::PORT
     if ($this->connection->connect_error) {
       die("Connection failed: " . $this->connection->connect_error);
     }

@@ -11,9 +11,9 @@ class Professor{
     public $dataNasc;
     public $idCargo;
 
-    public function getIdCargo($idCargo){
-        $this->idCargo = $idCargo;
-    }
+    // public function getIdCargo($idCargo){
+    //     $this->idCargo = $idCargo;
+    // }
 
     public function Cadastrar() {
         $db = new Database('professor');

@@ -10,13 +10,14 @@ class Post
     public $dataPost;
     public $corpo;
     public $anexo;
+    public $idProfessor;
 
-    public function cadastrar()
+    public function Cadastrar()
     {
         $db = new Database('post');
         return $db->insert([
                             'titulo'=> "'$this->titulo'",
-                            'dataPost'=> "'$this->dataPost'",
+                            //'dataPost'=> "'$this->dataPost'", retirei
                             'corpo'=> "'$this->corpo'",
                             'anexo'=> "'$this->anexo'"
                             ]);

@@ -1,28 +1,10 @@
 <?php
-    session_start();
+     session_start(); // initial session
 
-    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-        header("location: index.php");
-        exit;
-    }
-
-    if($_SERVER["REQUEST_METHOD"] == "POST"){
-        if( $_POST['ra'] != "" && $_POST['email'] != "" && $_POST['senha'] != "" && $_POST['nome'] != "" &&   $_POST['datanasc'] != "")  { 
-            
-            require_once('classes/Aluno.php');
-            $aluno = new Aluno();
-
-            $aluno->ra = $_POST['ra'];
-            $aluno->email = $_POST['email'];
-            $aluno->senha = $_POST['senha'];
-            $aluno->nome = $_POST['nome'];
-            $aluno->datanasc = $_POST['datanasc']; 
-
-            $aluno->Cadastrar();
-
-            header("location: ListaAluno.php");
-        }
-    }
+     if(!isset($_SESSION["administrativo"]) || $_SESSION["administrativo"] !== true){ // se não existir loggedin no session ou loggedin não estuver valido volta para index.php
+         header("location: index.php");
+         exit;
+     }
       
 ?>
 <!DOCTYPE html>
@@ -37,7 +19,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="dashboard.php">Fatec Araras</a>
+    <a class="navbar-brand" href="dashboard.php">Administrador</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -62,7 +44,7 @@
     </div>
   </div>
 </nav>
-<h2>Alunos Cadastrados</h2>
+<h2>Posts</h2>
     <div class="wrapper">
         <div class="content">
             <a href="criarPost.php">Adicionar Post</a>
