@@ -1,7 +1,7 @@
 <?php
      session_start(); // initial session
 
-     if(!isset($_SESSION["administrativo"]) || $_SESSION["administrativo"] !== true){ // se não existir loggedin no session ou loggedin não estuver valido volta para index.php
+     if(!isset($_SESSION["administrativo"]) || $_SESSION["administrativo"] !== true){
          header("location: index.php");
          exit;
      }

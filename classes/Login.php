@@ -21,7 +21,7 @@ class Login extends Database
 
         $conn = Database::setConnection();
 
-        $sql = "SELECT Email, Senha, IdAdministrativo FROM administrativo";
+        $sql = "SELECT Email, Senha, IdAdmin FROM administrativo";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
