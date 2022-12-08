@@ -1,6 +1,6 @@
 <?php
 
-require_once '../banco/Database.php';
+require_once './banco/Database.php';
 
 class Professor{
 
@@ -24,11 +24,9 @@ class Professor{
                             'dataNasc'=> "'$this->dataNasc'"
                             ]);
     }
-        
-      
-    public static function getAll(){
-    return (new Database('professor'))->select();
-    }
-    
+   
+    public static function getProfessor(){
+        return (new Database('professor'))->select();
+    }   
 }
     

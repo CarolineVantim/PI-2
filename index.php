@@ -22,15 +22,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if ($validar ) {
         if ($validar == 'administrativo') {
             $_SESSION['administrativo'] = TRUE;
-            header("location: dashboard.php");
+            $_SESSION['id'] = $login->getId();
+           header("location: dashboard.php");
         } else if ($validar == 'aluno') {
             $_SESSION['aluno'] = TRUE;
+            $_SESSION['id'] = $login->getId();
             header("location: dashboardAluno.php");
         } else if ($validar == 'professor') {
             $_SESSION['professor'] = TRUE;
+            $_SESSION['id'] = $login->getId();
             header("location: dashboardProfessor.php");
         } else if ($validar == 'empresa') {
             $_SESSION['empresa'] = TRUE;
+            $_SESSION['id'] = $login->getId();
             header("location: dashboardEmpresa.php");
         }
     }

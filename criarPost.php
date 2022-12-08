@@ -1,13 +1,15 @@
 <?php
      session_start(); // initial session
 
-     if(!isset($_SESSION["administrativo"]) || $_SESSION["administrativo"] !== true){
+     if($_SESSION == $_SESSION["aluno"]){
          header("location: index.php");
          exit;
      }
 
+     $id = $_SESSION['id'];
+
      if($_SERVER["REQUEST_METHOD"] == "POST"){
-         if($_POST['titulo'] != "" && $_POST['corpo'] != "")  { 
+         if($_POST['titulo'] != "" && $_POST['corpo'] != "" && $_POST['id'] != "" )  { 
             
              require_once('classes/Post.php');
              $postes = new Post();
@@ -15,11 +17,17 @@
              $postes->titulo = $_POST['titulo'];
              //$postes->dataPost = $_POST['dataPost'];
              $postes->corpo = $_POST['corpo'];
-             //$postes->idProfessor = $_POST['idProfessor']; 
+             if (isset($_SESSION["administrativo"]) && $_SESSION["administrativo"]) {
+              $postes->IdAdministrativo = $_SESSION["id"];
+             }elseif((isset($_SESSION["professor"]) && $_SESSION["professor"])){
+              $postes->idProfessor = $_SESSION["id"];
+             }elseif((isset($_SESSION["empresa"]) && $_SESSION["empresa"])){
+              $postes->idEmpresa = $_SESSION["id"];
+             }
 
             $postes->Cadastrar();
 
-            header("location: listaPost.php");
+            header("location: listaPostAdmin.php");
          }
     }
       
@@ -54,7 +62,7 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="listaPost.php">Posts</a>
+          <a class="nav-link" href="listaPostAdmin.php">Posts</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="logout.php">Sair</a>
@@ -71,6 +79,7 @@
             <label for="pagesTitle">Título</label>
             <input type="text" name="titulo" id="pagesTitle" class="form-control" required placeholder="Título">
         </div>
+        <input type="hidden" name="id" value="<?php echo $_SESSION['id']?>">
         <!-- <div class="form-group">
             <label for="pagesTitle">Data</label>
             <input type="date" name="dataPost" id="pagesTitle" class="form-control" placeholder="Data">

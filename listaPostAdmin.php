@@ -5,7 +5,8 @@
          header("location: index.php");
          exit;
      }
-      
+    
+    // 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,13 +31,13 @@
             Cadastros
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="listaProfessor.php">Cadastro Professor</a></li>
-            <li><a class="dropdown-item" href="ListaAluno.php">Cadastro Aluno</a></li>
-            <li><a class="dropdown-item" href="listaEmpresa.php">Cadastro Empresa</a></li>
+            <li><a class="dropdown-item" href="Professor/listaProfessor.php">Cadastro Professor</a></li>
+            <li><a class="dropdown-item" href="Aluno/ListaAluno.php">Cadastro Aluno</a></li>
+            <li><a class="dropdown-item" href="Empresa/listaEmpresa.php">Cadastro Empresa</a></li>
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="listaPost.php">Posts</a>
+          <a class="nav-link" href="listaPostAdmin.php">Posts</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="logout.php">Sair</a>
@@ -55,6 +56,7 @@
                     <tr>
                         <th class="text-center">Titulo</th>
                         <th class="text-center">Data do Post</th>
+                        <th class="text-center">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -63,12 +65,14 @@
                         $post = new Post();
                         $posts = $post->getPost();
                         foreach($posts as $line){ 
-                            $idPost = $line['idPost'];
-                            $titulo = $line['titulo'];
-                            $dataPost = $line['dataPost'];
-                            echo "<tr><td>$titulo</td><td>$dataPost</td></tr>";
+                            $IdPost = $line['IdPost'];
+                            $Titulo = $line['Titulo'];
+                            $DataPost = $line['DataPost'];
+                            echo "<tr><td>$Titulo</td><td>$DataPost</td></tr>";
                         }
                     ?>
+                      <td><a href="">Editar</a></td>
+                    </tr>
                 </tbody>
             </table>
         </section>

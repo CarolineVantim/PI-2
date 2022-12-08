@@ -44,18 +44,8 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-      <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Cadastros
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="listaProfessor.php">Cadastro Professor</a></li>
-            <li><a class="dropdown-item" href="../Aluno/listaAluno.php">Cadastro Aluno</a></li>
-            <li><a class="dropdown-item" href="../Empresa/listaEmpresa.php">Cadastro Empresa</a></li>
-          </ul>
-        </li>
         <li class="nav-item">
-          <a class="nav-link" href="../listaPost.php">Posts</a>
+          <a class="nav-link" href="../listaPostAdmin.php">Posts</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="../logout.php">Sair</a>
@@ -85,6 +75,15 @@
                 <label>Data de Nascimento</label>
                 <input type="date" name="dataNasc" class="form-control" value="">
                 <span class="help-block"></span>
+            </div>
+            <br>
+            <div class="form-group">
+              <select class="form-select" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
             </div>
             <!-- <br>
             <label for="">Cargo</label>

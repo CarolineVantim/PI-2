@@ -63,7 +63,7 @@
   <div class="card-body">
     <h5 class="card-title"><a href="exibe.php?id=<?php echo $post['idPost']; ?>" title="<?php echo $post['titulo']; ?>"><?php echo $post['titulo']; ?></a></h5>
     <h6 class="card-subtitle mb-2 text-muted">
-        por <b><?php echo $post['idProfessor']; ?></b>
+        por <b><?php echo $post['idProfessor'] || $post['idEmpresa'] || $post['idAdmin']; ?></b>
     em <b><?php echo date('d/m/Y', strtotime($post['dataPost'])) ?></b> 
   </h6>
     <p class="card-text">

@@ -37,7 +37,7 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="../listaPost.php">Posts</a>
+          <a class="nav-link" href="../listaPostAdmin.php">Posts</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="../logout.php">Sair</a>
@@ -58,21 +58,24 @@
                         <th class="text-center">Nome</th>
                         <th class="text-center">Email</th>
                         <th class="text-center">Data de Nascimento</th>
+                        <th class="text-center"> Ações </th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php   
                         require_once('../classes/Professor.php');
                         $professor = new Professor();
-                        $professores = $professor->getAll();
+                        $professores = $professor->getProfessor();
                         foreach ($professores as $line) {
-                            $idProfessor = $line['idProfessor'];
-                            $nome = $line['nome'];
-                            $email = $line['email'];
-                            $dataNasc = $line['dataNasc'];
+                            $nome = $line['Nome'];
+                            $email = $line['Email'];
+                            $dataNasc = $line['DataNasc'];
                             echo "<tr><td>$nome</td><td>$email</td><td>$dataNasc</td><td>";
                         }
                     ?>
+                    <td><a href="">Delete</a></td>
+                    <td><a href="">Editar</a></td>
+                    </tr>
                 </tbody>
             </table>
         </section>

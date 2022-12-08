@@ -1,10 +1,13 @@
-<?php
-    session_start(); // initial session
 
-    if(!isset($_SESSION["administrativo"]) || $_SESSION["administrativo"] !== true){ // se não existir loggedin no session ou loggedin não estuver valido volta para index.php
+<?php
+    session_start();
+
+    if(!isset($_SESSION["administrativo"]) || $_SESSION["administrativo"] !== true){
         header("location: index.php");
         exit;
     }
+
+    var_dump($_SESSION['id']);
 ?>
  
 <!DOCTYPE html>
@@ -34,7 +37,7 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="listaPost.php">Posts</a>
+          <a class="nav-link" href="listaPostAdmin.php">Posts</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="logout.php">Sair</a>
@@ -42,7 +45,9 @@
     </div>
   </div>
 </nav>
-<h2>Bem vindo</h2>
+<h2>Olá,</h2>
+
+<?php var_dump($_SESSION['administrativo']); ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
