@@ -1,125 +1,174 @@
 <?php
-    session_start(); // initial session
 
-    if(!isset($_SESSION["aluno"]) || $_SESSION["aluno"] !== true){ // se não existir loggedin no session ou loggedin não estuver valido volta para index.php
-        header("location: index.php");
-        exit;
-    }
+session_start(); // initial session
 
+if(!isset($_SESSION["aluno"]) || $_SESSION["aluno"] !== true){ // se não existir loggedin no session ou loggedin não estuver valido volta para index.php
+    header("location: index.php");
+    exit;
+}   
+
+require_once('classes/Post.php');
+      $posts = new Post();
+      $count = $posts->contarPosts();
 
 ?>
  
-<!DOCTYPE html>
-<html lang="pt_BR">
+ <!doctype html>
+<html lang="pt-br">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Ester Morais">
+  <meta name="generator" content="Hugo 0.104.2">
+  <title>Dashboard</title>
+
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sidebars/">
+
+  <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="./upload/styles/sidebars.css" rel="stylesheet">
+
+  <link href="./upload/styles/dashboard.css" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    .b-example-divider {
+      height: 3rem;
+      background-color: rgba(0, 0, 0, .1);
+      border: solid rgba(0, 0, 0, .15);
+      border-width: 1px 0;
+      box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+    }
+
+    .b-example-vr {
+      flex-shrink: 0;
+      width: 1.5rem;
+      height: 100vh;
+    }
+
+    .bi {
+      vertical-align: -.125em;
+      fill: currentColor;
+    }
+
+    .nav-scroller {
+      position: relative;
+      z-index: 2;
+      height: 2.75rem;
+      overflow-y: hidden;
+    }
+
+    .nav-scroller .nav {
+      display: flex;
+      flex-wrap: nowrap;
+      padding-bottom: 1rem;
+      margin-top: -1px;
+      overflow-x: auto;
+      text-align: center;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+  </style>
+
 </head>
+
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-  <a class="navbar-brand" href="dashboardAluno.php">Aluno</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-      <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Matérias
+
+  <main class="d-flex flex-nowrap">
+
+    <!-- Nav -->
+    <div class="d-flex flex-column flex-shrink-0 p-3" style="width: 280px; background-color:#121212;">
+      <a href="dashboardAluno.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+        <div class="rounded-circle me-2" style="background-color: white;">
+          <img src="./upload/assets/logo-plataforma.svg" class="bi pe-none " width="40" height="35" alt="foto de perfil do usuário logado">
+        </div>
+        <span style="font-weight: bold;" class="fs-4">Mais Ensina</span>
+      </a>
+      <hr>
+      <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+          <a href="listaPostAluno.php" class="nav-link text-white" aria-current="page">
+            <img src="./upload/assets/icon-home.svg" class="bi pe-none me-2" width="25" height="25" alt="icon de uma casa branca">
+            Home
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="listaProfessor.php">Português</a></li>
-            <li><a class="dropdown-item" href="ListaAluno.php">Matemática</a></li>
-            <li><a class="dropdown-item" href="#">Inglês</a></li>
-          </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Atividades Extracurriculares</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="logout.php">Sair</a>
-        </li>
+      </ul>
+      <hr>
+      <div>
+          <a href="logout.php" style="text-decoration:none;">
+              <img src="./upload/assets/avatar.svg" alt="foto de perfil do usuário logado" width="32" height="32" class="rounded-circle me-2">
+              <strong style="color: white;">Aluno</strong> <!-- nome do professor logado -->
+          </a>
+      </div>
     </div>
-  </div>
-</nav>
+    <!-- End Nav -->
 
-<div class="container">
+    <div class="b-example-divider b-example-vr"></div>
 
-	<?php
-		require_once('./classes/Post.php');
-    $post = new Post();
-    $posts = $post->getPost();
 
-		if (empty($posts))
-			echo "<h1>Nenhuma postagem encontrada!</h1>";
-		else
-			foreach ($posts as $post):
-	?>
+    <div class="container">
 
-<div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="upload/matematica.jpg" height='350' width='350' alt="Card image cap"> 
-  <div class="card-body">
-    <h5 class="card-title"><a href="exibe.php?id=<?php echo $post['idPost']; ?>" title="<?php echo $post['titulo']; ?>"><?php echo $post['titulo']; ?></a></h5>
-    <h6 class="card-subtitle mb-2 text-muted">
-        por <b><?php echo $post['idProfessor'] || $post['idEmpresa'] || $post['idAdmin']; ?></b>
-    em <b><?php echo date('d/m/Y', strtotime($post['dataPost'])) ?></b> 
-  </h6>
-    <p class="card-text">
-        <?php
-      $str = strip_tags($post['corpo']);
-      $len = strlen($str);
-      $max = 500;
+      <h2 class="mb-5 mt-5">Postagens Gerais</h2>
+              <div class="scroll">
+                  <div class="postagens" style="display:flex; flex-wrap:wrap; gap:10px">
+                      <!-- Pega a data da postagem feita, titulo e nome do professor -->
 
-      if ($len <= $max)
-        echo $str;
-      else
-        echo substr($str, 0, $max) . '...';
-        ?>
-    </p>
-    <div class="pb-5"><a href="exibe.php?id=<?php echo $post['idPost']; ?>" class="btn btn-dark float-right" title="Ler Mais">Ler Mais</a></div>
-  </div>
-</div>
+          <?php
+              $posts = new Post;
+              while ($count > 0) {
+              $line = $posts->selectAluno($count,$_SESSION['id']);
+              if (($line) && ($line != 0)){
+          ?>
+                      <div class="card mt-2 text-bg-light" style="width: 25rem;">
+                          <p style="margin-left:15px; margin-top:8px; font-weight: bold;">Titulo: <span style="font-weight: 500;"><?php echo $line[0]."<br>";?><span></p>
+                          <p style="margin-left:15px; margin-top:8px; font-weight: bold;">Descrição: <span style="font-weight: 500;"><?php echo $line[2]."<br>";?><span></p>
+                          <div class="card-body">
+                              <h6 class="card-title" style="font-weight:bold">Autor:<span style="font-weight: 500;"><?php echo $line[5]."<br>";?></span></h6>
+                              <p style="margin-top:8px; font-weight: bold;">Data:<span style="font-weight: 500;"><?php echo $line[1]."<br>";?><span></p>
+                          </div>
+                      </div>
 
-<?php endforeach; ?>
-</div>
+                      <?php
+                      }
+                  $line = 0;
+                  $count --;   
+                          }
+                  ?>    
 
-<!-- <div class="card" style="width: 18rem;">
-  <img src="upload/matematica.jpg" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div> -->
-<!-- </div>
-    <div class="wrapper">
-        <section class="aluno">
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th class="text-center">Título</th>
-                        <th class="text-center">Descrição</th>
-                        <th class="text-center">Professor</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                        // require_once('./classes/Post.php');
-                        // $post = new Post();
-                        // $posts = $post->getPost();
-                        // foreach($posts as $key){ 
-                        //     $titulo = $key['titulo'];
-                        //     $corpo = $key['corpo'];
-                        //     echo "<tr><td>$titulo</td><td>$corpo</td></tr>";
-                        //}
-                    
-                </tbody>
-            </table>
-        </section>
-    </div> -->
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+                  </div>
+              </div>
+      </div>
+      
+  
+
+
+  </main>
+
+
+  <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script src="./upload/js/sidebars.js"></script>
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 </html>
+  

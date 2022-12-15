@@ -4,8 +4,8 @@ require_once '../banco/Database.php';
 
 class Cargo
 {
-    public $idCargo;
-    public $cargo;
+    private $IdCargo;
+    private $Cargo;
 
 
     public function getCargo()

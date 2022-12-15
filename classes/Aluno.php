@@ -4,27 +4,29 @@ require_once '../banco/Database.php';
 
 class Aluno{
 
-    public $ra;
-    public $email;
-    public $senha;
-    public $nome;
-    public $dataNasc;
-    
     public function Cadastrar() {
         $db = new Database('aluno');
-        return $db->insert([
-                            'ra'=> "'$this->ra'",
-                            'email'=> "'$this->email'",
-                            'senha'=> "'$this->senha'",
-                            'nome'=> "'$this->nome'",
-                            'dataNasc'=> "'$this->dataNasc'"
-                            ]);
+        $data = [
+            'RA'=> "'$this->RA'",
+            'Email'=> "'$this->Email'",
+            'Senha'=> "'$this->Senha'",
+            'Nome'=> "'$this->Nome'",
+            'DataNasc'=> "'$this->DataNasc'",
+        ];
+
+        if (!empty($this->IdTurma)) {
+            $data['IdTurma'] = $this->IdTurma;
+        }
+
+        return $db->insert($data);
     }
         
-
-    public static function getAlunos(){
+    public function getAlunos(){
         return (new Database('aluno'))->select();
     }
-    
+
+    public function getTurma(){
+        return (new Database('turma'))->select();
+    }
 }
     

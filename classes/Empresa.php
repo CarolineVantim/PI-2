@@ -4,13 +4,6 @@ require_once '../banco/Database.php';
 
 class Empresa{
 
-    public $idEmpresa;
-    public $cnpj;
-    public $nome;
-    public $endereco;
-    public $email;
-    public $senha;
-
     public function Cadastrar() {
         $db = new Database('empresa');
         return $db->insert([

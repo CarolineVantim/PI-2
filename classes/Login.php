@@ -28,7 +28,6 @@ class Login extends Database
                 if (($email == $row["Email"]) && ($senha == $row["Senha"])) {
                     $login = "administrativo";
                     $this->setId($row["IdAdministrativo"]);
-                    echo $this->getId();
                     $count++;
                 }
             }

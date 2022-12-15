@@ -3,7 +3,7 @@
 class Database{
 
   const SERVERNAME = 'localhost';
-  const DBNAME = 'maisensina2';
+  const DBNAME = 'maisensina';
   const USERNAME = 'root';
   const PASS = '';
   const PORT = '33306';
@@ -29,6 +29,7 @@ class Database{
     $binds  = array_pad($values, count($fields),'?');
 
     $query = 'INSERT INTO '.$this->table.' ('.implode(',',$fields).') VALUES ('.implode(',',$binds).')';
+    
     if ($this->connection->query($query) === TRUE) {
       return true;
     } else {
@@ -37,7 +38,8 @@ class Database{
     $this->connection->close();
   }
 
-  public function select($where = null, $order = null, $limit = null, $fields = '*'){
+  public function select($where = null, $order = null, $limit = null, $fields = '*')
+  {
     $where = strlen($where) ? 'WHERE '.$where : '';
     $order = strlen($order) ? 'ORDER BY '.$order : '';
     $limit = strlen($limit) ? 'LIMIT '.$limit : '';
@@ -47,6 +49,20 @@ class Database{
     $result = $this->connection->query($query);
     $this->connection->close();
     return $result;
+  }
+
+  public function delete(){
+
+  }
+
+  public function update()
+  {
+
+  }
+
+  public function read()
+  {
+
   }
 
 }

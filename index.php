@@ -5,13 +5,13 @@ require_once "classes/Login.php";
 session_start();
 
 if (isset($_SESSION['administrativo'])) {
-    header("location: dashboard.php");
+    header("location: listaPostAdmin.php");
 } else if (isset($_SESSION['aluno'])) {
-    header("location: dashboardAluno.php");
+    header("location: listaPostAluno.php");
 } else if (isset($_SESSION['professor'])) {
-    header("location: dashboardProfessor.php");
+    header("location: listaPostProfessor.php");
 } else if (isset($_SESSION['empresa'])) {
-    header("location: dashboardEmpresa.php");
+    header("location: listaPostEmpresa.php");
 }
 
 
@@ -23,56 +23,83 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         if ($validar == 'administrativo') {
             $_SESSION['administrativo'] = TRUE;
             $_SESSION['id'] = $login->getId();
-           header("location: dashboard.php");
+           header("location: listaPostAdmin.php");
         } else if ($validar == 'aluno') {
             $_SESSION['aluno'] = TRUE;
             $_SESSION['id'] = $login->getId();
-            header("location: dashboardAluno.php");
+            header("location: listaPostAluno.php");
         } else if ($validar == 'professor') {
             $_SESSION['professor'] = TRUE;
             $_SESSION['id'] = $login->getId();
-            header("location: dashboardProfessor.php");
+            header("location: listaPostProfessor.php");
         } else if ($validar == 'empresa') {
             $_SESSION['empresa'] = TRUE;
             $_SESSION['id'] = $login->getId();
-            header("location: dashboardEmpresa.php");
+            header("location: listaPostEmpresa.php");
         }
     }
 }
 ?>
  
-<!DOCTYPE html>
-<html lang="pt_BR">
+ <!DOCTYPE html>
+<html lang="pt_br">
+
 <head>
     <meta charset="UTF-8">
-    <title>Acessar</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
-    <style type="text/css">
-        body{ font: 14px sans-serif; }
-        .title{text-align: center; margin-top:30px;}
-        .wrapper{ width: 350px; padding: 20px; margin: auto; margin-top: 50px;}
-    </style>
+    <meta name="author" content="Ester Morais, Carol Vantim, Fernando Maldonado">
+    <meta name="description" content="Página de login do Mais Ensina">
+    <title>Tela de Login</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="upload/styles/login.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
+
 <body>
-    <h1 class="title">Login</h1>
-    <div class="wrapper">
-        <h2>Acessar</h2>
-        <p>Favor inserir login e senha.</p>
+    <div class="container">
+        <!-- Logo -->
+        <div class="logo transformar">
+            <img src="./upload/assets/logo-plataforma.svg" width="80px" alt="Logo Mais Ensina">
+        </div>
+        <!-- End Logo -->
+
+        <!-- Formulário -->
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <div class="form-group">
-                <label>Usuário</label>
-                <input type="email" name="email" class="form-control" value="">
-                <span class="help-block"></span>
-            </div>    
-            <div class="form-group">
-                <label>Senha</label>
-                <input type="password" name="senha" class="form-control" value="">
-                <span class="help-block"></span>
+            <div class="mb-3 texto formulario">
+                <label for="exampleInputEmail1" class="form-label">Endereço de e-mail</label>
+                <input type="email" name="email" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Acessar">
+            <div class="mb-3 texto formulario">
+                <label for="exampleInputPassword1" class="form-label">Sua senha</label>
+                <input type="password" name="senha" required class="form-control" id="exampleInputPassword1">
             </div>
+            <div class="mb-3 form-check texto formulario">
+                <input type="checkbox" required class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Lembrar de mim por 30 dias</label>
+            </div>
+            <button type="submit" class="btn">Entrar na Plataforma</button>
         </form>
-    </div>    
+        <!-- End formulário-->
+
+        <!-- Senha -->
+        <div class="paragraphs">
+            <a href="#">
+                <p>Esqueceu sua senha?</p>
+            </a>
+        </div>
+        <!-- End Senha -->
+
+    </div>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <!-- Script -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            easing: 'ease-out-back',
+            duration: 1000
+        });
+    </script>
 </body>
+
 </html>

@@ -1,28 +1,23 @@
 <?php
 
-require_once './banco/Database.php';
+require_once '../banco/Database.php';
 
 class Professor{
 
-    public $idProfessor;
-    public $email;
-    public $senha;
-    public $nome;
-    public $dataNasc;
-    public $idCargo;
-
-    // public function getIdCargo($idCargo){
-    //     $this->idCargo = $idCargo;
-    // }
-
     public function Cadastrar() {
         $db = new Database('professor');
-        return $db->insert([  
-                            'email'=> "'$this->email'",
-                            'senha'=> "'$this->senha'",
-                            'nome'=> "'$this->nome'",
-                            'dataNasc'=> "'$this->dataNasc'"
-                            ]);
+        $data = [
+            'Email'=> "'$this->Email'",
+            'Senha'=> "'$this->Senha'",
+            'Nome'=> "'$this->Nome'",
+            'DataNasc'=> "'$this->DataNasc'",
+        ];
+
+        if (!empty($this->IdCargo)) {
+            $data['IdCargo'] = $this->IdCargo;
+        }
+
+        return $db->insert($data);
     }
    
     public static function getProfessor(){
